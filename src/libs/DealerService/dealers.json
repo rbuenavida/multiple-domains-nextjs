@@ -1,0 +1,32 @@
+[
+    {
+        "domains": [
+            "domain1.com"
+        ],
+        "orgId": 481,
+        "orgUnitId": 2187,
+        "websiteId": 3170,
+        "location": "ON",
+        "styles": [
+            "/css/showroom/specific-make/audi.css",
+            "/css/audithornhill/theme.css",
+            "/css/showroom/specific-make/specific-audi.css"
+        ],
+        "dealerName": "Domain 1"
+    },
+    {
+        "domains": [
+            "localhost",
+            "domain2.com"
+        ],
+        "orgId": 482,
+        "orgUnitId": 1703,
+        "websiteId": 2574,
+        "location": "BC",
+        "styles": [
+            "/css/showroom/specific-make/subaru.css",
+            "/css/docksteadersubaru/theme.css"
+        ],
+        "dealerName": "Domain 2"
+    }
+]

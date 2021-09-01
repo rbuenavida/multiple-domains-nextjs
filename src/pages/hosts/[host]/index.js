@@ -4,7 +4,10 @@ import { useRouter } from 'next/router';
 
 import Header from 'components/header';
 import Footer from 'components/footer';
-export default function Home({ host, id, time }) {
+
+import DealerService from 'libs/DealerService/DealerService';
+
+export default function Home({ host, id, time, cmsProperties}) {
   const router = useRouter();
 
   // Host available on query from router if blocking or fallback
@@ -21,8 +24,10 @@ export default function Home({ host, id, time }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header host={host} />
-      <h1>Home - Host: {host}</h1>
+      <h2>Home - Host: {host}</h2>
+      <h1>{cmsProperties.dealerConfig.dealerName}</h1>
       <p>
+        Organization ID: {cmsProperties.dealerConfig.orgId}<br/>
         <b>Generated At:</b>
         <i>{time}</i>
       </p>
@@ -37,12 +42,20 @@ export async function getStaticProps(context) {
 
   const host = context.params.host;
 
+  const dealerConfig = DealerService.getByDomain(host);
+
+  // Here we do some async logic to get properties from Headless CMS
+  const cmsProperties = { dealerConfig } // for this examples sake
+  // ...
+  // ...
+
   const time = Date.now();
 
   return {
     props: {
       host,
       time,
+      cmsProperties
     },
     // revalidate: 10,
   };
@@ -50,7 +63,10 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   return {
-    paths: [],
+    paths: [
+      { params: { host: 'domain1.com' } },
+      { params: { host: 'domain2.com' } },
+    ],
     fallback: 'blocking',
   };
 }
